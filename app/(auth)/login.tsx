@@ -399,6 +399,27 @@ export default function Login() {
               <Mail size={18} color="#4B5563" style={styles.btnIcon} />
               <Text style={styles.emailPillBtnText}>Continue with Email</Text>
             </TouchableOpacity>
+
+            {/* 3. INSTANT PREVIEW LOGIN (1-Tap bypass without OAuth redirect issues) */}
+            <TouchableOpacity 
+              style={styles.demoPillBtn}
+              activeOpacity={0.85}
+              onPress={async () => {
+                const finalRole = mainRole === 'customer' ? 'customer' : 'chef';
+                const demoId = generateUUID();
+                await loginAs(finalRole, { 
+                  id: demoId,
+                  name: finalRole === 'chef' ? 'Partner Chef (Demo)' : 'Rohan Mehta (Demo)', 
+                  email: finalRole === 'chef' ? 'demo.chef@instacome.app' : 'demo.customer@instacome.app',
+                  isNewSignup: false 
+                });
+                await routeUserAfterAuth(demoId, finalRole);
+              }}
+            >
+              <Text style={styles.demoPillBtnText}>
+                ⚡ Instant Preview Login as {mainRole === 'chef' ? 'Chef' : 'Customer'}
+              </Text>
+            </TouchableOpacity>
           </View>
 
           {/* DISCLAIMER FOOTER */}
@@ -566,9 +587,9 @@ const styles = StyleSheet.create({
   },
   mainBody: {
     flex: 1,
-    justifyContent: "space-between",
+    justifyContent: "center",
     paddingHorizontal: 22,
-    paddingTop: 0,
+    paddingVertical: 12,
     alignItems: "center",
     width: "100%",
     maxWidth: 440,
@@ -582,25 +603,26 @@ const styles = StyleSheet.create({
   heroSection: {
     alignItems: "center",
     width: "100%",
+    marginBottom: 6,
   },
   illustration: {
-    width: 220,
-    height: 176,
-    marginBottom: 16,
+    width: 130,
+    height: 84,
+    marginBottom: 8,
   },
   title: {
-    fontSize: 20,
+    fontSize: 19,
     fontWeight: "900",
     color: "#1E1B4B",
     textAlign: "center",
-    marginBottom: 6,
+    marginBottom: 4,
     letterSpacing: -0.2,
   },
   subtitle: {
-    fontSize: 12.5,
+    fontSize: 12,
     color: "#6B7280",
     textAlign: "center",
-    marginBottom: 18,
+    marginBottom: 14,
     paddingHorizontal: 4,
     letterSpacing: -0.2,
   },
@@ -663,27 +685,27 @@ const styles = StyleSheet.create({
     color: "#9333EA",
   },
 
-  // Bottom Section (contains action buttons and disclaimer - fills down to bottom)
+  // Bottom Section (contains action buttons and disclaimer)
   bottomSection: {
     width: "100%",
     alignItems: "center",
-    marginTop: 4,
+    marginTop: 10,
   },
   actionsContainer: {
     width: "100%",
-    marginBottom: 12,
+    marginBottom: 10,
   },
   googlePillBtn: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
-    height: 52,
-    borderRadius: 26,
+    height: 50,
+    borderRadius: 25,
     backgroundColor: "#FFFFFF",
     borderWidth: 1.5,
     borderColor: "#E5E7EB",
-    marginBottom: 12,
+    marginBottom: 10,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.04,
@@ -697,7 +719,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   googlePillBtnText: {
-    fontSize: 15,
+    fontSize: 14.5,
     fontWeight: "600",
     color: "#1F2937",
   },
@@ -706,17 +728,34 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
-    height: 52,
-    borderRadius: 26,
+    height: 50,
+    borderRadius: 25,
     backgroundColor: "#F3F4F6",
   },
   btnIcon: {
     marginRight: 10,
   },
   emailPillBtnText: {
-    fontSize: 15,
+    fontSize: 14.5,
     fontWeight: "600",
     color: "#374151",
+  },
+  demoPillBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: "#FAF5FF",
+    borderWidth: 1.5,
+    borderColor: "#4C1D95",
+    marginTop: 10,
+  },
+  demoPillBtnText: {
+    fontSize: 13.5,
+    fontWeight: "800",
+    color: "#4C1D95",
   },
 
   // Disclaimer
