@@ -642,14 +642,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
   },
 
-  // 1. IN-PAGE CLEAN HEADER (Location on Left, Big Logo on Extreme Right Edge)
+  // 1. IN-PAGE CLEAN HEADER (Location on Left, Clean Balanced Logo on Right)
   inPageHeader: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     paddingLeft: 16,
-    paddingRight: 0,
-    paddingVertical: 6,
+    paddingRight: 14,
+    paddingVertical: 10,
     borderBottomWidth: 1,
     borderBottomColor: "#EDE9FE",
     backgroundColor: "#FFFFFF",
@@ -658,11 +658,10 @@ const styles = StyleSheet.create({
   logoWrapper: {
     alignItems: "flex-end",
     justifyContent: "center",
-    marginRight: -4,
   },
   logo: {
-    width: 105,
-    height: 72,
+    width: 68,
+    height: 44,
   },
   locationBtn: {
     alignItems: "flex-start",
