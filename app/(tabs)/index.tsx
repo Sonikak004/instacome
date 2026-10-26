@@ -159,7 +159,7 @@ export default function Home() {
         showsVerticalScrollIndicator={false}
       >
         
-        {/* 1. IN-PAGE CLEAN HEADER (Location on Left, Big Logo on Right Corner) */}
+        {/* 1. IN-PAGE CLEAN HEADER (Location on Left, Big Logo on Extreme Right Edge) */}
         <View style={styles.inPageHeader}>
           <TouchableOpacity 
             style={styles.locationBtn} 
@@ -170,11 +170,16 @@ export default function Home() {
             <Text style={styles.locationTitle}>{selectedLocation} ⌄</Text>
           </TouchableOpacity>
 
-          <Image 
-            source={require("../../assets/logo.png")} 
-            style={styles.logo}
-            resizeMode="contain"
-          />
+          <View style={styles.logoWrapper}>
+            <Image 
+              source={require("../../assets/logo.png")} 
+              style={[
+                styles.logo,
+                { objectFit: "contain", objectPosition: "right center" } as any
+              ]}
+              resizeMode="contain"
+            />
+          </View>
         </View>
 
         {/* 2. HERO AD BANNER (Swipable, Exact Same Size, Clear Image) */}
@@ -637,23 +642,27 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
   },
 
-  // 1. IN-PAGE CLEAN HEADER (Location on Left, Big Logo on Far Right Corner)
+  // 1. IN-PAGE CLEAN HEADER (Location on Left, Big Logo on Extreme Right Edge)
   inPageHeader: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     paddingLeft: 16,
-    paddingRight: 6,
+    paddingRight: 0,
     paddingVertical: 6,
     borderBottomWidth: 1,
     borderBottomColor: "#EDE9FE",
     backgroundColor: "#FFFFFF",
     marginBottom: 12,
   },
+  logoWrapper: {
+    alignItems: "flex-end",
+    justifyContent: "center",
+    marginRight: -4,
+  },
   logo: {
-    width: 136,
-    height: 62,
-    marginRight: 0,
+    width: 105,
+    height: 72,
   },
   locationBtn: {
     alignItems: "flex-start",
